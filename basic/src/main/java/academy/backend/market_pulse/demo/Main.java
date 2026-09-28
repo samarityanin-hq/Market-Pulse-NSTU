@@ -49,11 +49,12 @@ public class Main {
         user.addPosition(ofz, 5);
         user.addPosition(tmos, 3);
         Portfolio.Position[]  pos = user.getPositions();
+
         System.out.println("\nПортфель пользователя: " + user.getName());
 
         for (Portfolio.Position position : pos){
-            System.out.println(position.getInstrument());
-            System.out.println(position.getQuantity());
+            System.out.println("Инструмент:" + position.getInstrument());
+            System.out.println("Кол-во: " + position.getQuantity());
         }
     }
 }
