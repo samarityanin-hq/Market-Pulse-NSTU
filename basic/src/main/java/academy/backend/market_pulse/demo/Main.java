@@ -9,6 +9,9 @@ import academy.backend.market_pulse.model.Etf;
 import academy.backend.market_pulse.model.Instrument;
 import academy.backend.market_pulse.model.Quote;
 import academy.backend.market_pulse.model.Stock;
+import main.java.academy.backend.market_pulse.model.Portfolio;
+import main.java.academy.backend.market_pulse.model.PositionDTO;
+import main.java.academy.backend.market_pulse.model.User;
 
 public class Main {
 
@@ -40,5 +43,17 @@ public class Main {
 
         // TODO: построить Portfolio, добавить позиции (sber x10, ofz x5, tmos x3)
         // и вывести список позиций.
+
+        User user = new User("Илья");
+        user.addPosition(sber, 10);
+        user.addPosition(ofz, 5);
+        user.addPosition(tmos, 3);
+        Portfolio.Position[]  pos = user.getPositions();
+        System.out.println("\nПортфель пользователя: " + user.getName());
+
+        for (Portfolio.Position position : pos){
+            System.out.println(position.getInstrument());
+            System.out.println(position.getQuantity());
+        }
     }
 }

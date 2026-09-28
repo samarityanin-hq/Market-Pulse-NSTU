@@ -1,5 +1,6 @@
-package academy.backend.market_pulse.model;
+package main.java.academy.backend.market_pulse.model;
 
+import academy.backend.market_pulse.model.Instrument;
 /**
  * Портфель пользователя.
  * <p>
