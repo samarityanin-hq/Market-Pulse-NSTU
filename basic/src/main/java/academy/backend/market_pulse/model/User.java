@@ -23,13 +23,15 @@ public class User implements Portfolio {
 
     @Override
     public Position[] getPositions() {
-        List<PositionDTO> positions = new ArrayList<>();
+        Position[] positions = new Position[storage.size()];
+        int i = 0;
 
         for (Map.Entry<Instrument, Integer> entry : storage.entrySet()){
-            positions.add(new PositionDTO(entry.getKey(), entry.getValue()));
+            positions[i] = new PositionDTO(entry.getKey(), entry.getValue());
+            i++;
         }
 
-        return positions.toArray(new PositionDTO[0]);
+        return positions;
     }
 
     @Override
@@ -38,7 +40,7 @@ public class User implements Portfolio {
             throw new IllegalArgumentException("Инструмент не может быть пустым");
         }
         if (quantity <= 0){
-            throw new IllegalArgumentException("Колличество должно быть больше нуля");
+            throw new IllegalArgumentException("Количество должно быть больше нуля");
         }
 
         storage.merge(instrument, quantity, Integer::sum);
