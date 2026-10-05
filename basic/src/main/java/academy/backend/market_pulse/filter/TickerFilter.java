@@ -3,15 +3,16 @@ package academy.backend.market_pulse.filter;
 import academy.backend.market_pulse.model.Instrument;
 
 public class TickerFilter implements InstrumentFilter {
+    private final String ticker;
 
-    private final String query;
-
-    public TickerFilter(String query) {
-        this.query = query;
+    public TickerFilter(String ticker) {
+        this.ticker = ticker;
     }
 
     @Override
     public boolean matches(Instrument instrument) {
-        return instrument.getTicker().toUpperCase().contains(query.toUpperCase());
+        return instrument.getTicker()
+                .toUpperCase()
+                .contains(ticker.toUpperCase());
     }
 }

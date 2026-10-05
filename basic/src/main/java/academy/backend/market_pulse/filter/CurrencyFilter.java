@@ -4,7 +4,6 @@ import academy.backend.market_pulse.model.Currency;
 import academy.backend.market_pulse.model.Instrument;
 
 public class CurrencyFilter implements InstrumentFilter {
-
     private final Currency currency;
 
     public CurrencyFilter(Currency currency) {
@@ -13,6 +12,6 @@ public class CurrencyFilter implements InstrumentFilter {
 
     @Override
     public boolean matches(Instrument instrument) {
-        return instrument.getCurrency() == currency;
+        return instrument.getCurrency().equals(currency);
     }
 }
