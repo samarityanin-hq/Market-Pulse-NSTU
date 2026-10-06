@@ -2,28 +2,28 @@ package academy.backend.market_pulse.factory;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ServiceLoader;
 
 import academy.backend.market_pulse.model.Currency;
 import academy.backend.market_pulse.model.Instrument;
 
 /**
- * Реестр фабрик инструментов. Каждая фабрика регистрирует себя сама при загрузке своего класса —
- * по аналогии с {@code DriverManager} в JDBC.
+ * Реестр фабрик инструментов. Вместо загрузки каждой фабрики можно заставить java найти все самостоятельно
+ *         // так же блоки инициализации из классов фабрик так же можно убрать нужен только публичный конструктор
  */
 public final class InstrumentFactories {
 
     private static final Map<String, InstrumentFactory> REGISTRY = new HashMap<>();
 
     static {
-        // Статический блок фабрики выполняется только при загрузке её класса — форсируем загрузку,
-        // иначе реестр останется пустым (тот же нюанс, что и с DriverManager до JDBC 4.0).
-        loadClass(StockFactory.class);
-        loadClass(BondFactory.class);
-        loadClass(EtfFactory.class);
+        ServiceLoader<InstrumentFactory> loader = ServiceLoader.load(InstrumentFactory.class);
+        for (InstrumentFactory factory : loader){
+            String type = factory.getClass().getSimpleName().replace("Factory", "").toUpperCase();
+            REGISTRY.put(type, factory);
+        }
     }
 
-    private InstrumentFactories() {
-    }
+    private InstrumentFactories() {}
 
     public static void register(String type, InstrumentFactory factory) {
         REGISTRY.put(type.toUpperCase(), factory);
@@ -37,11 +37,5 @@ public final class InstrumentFactories {
         return factory.create(ticker, name, currency);
     }
 
-    private static void loadClass(Class<?> factoryClass) {
-        try {
-            Class.forName(factoryClass.getName());
-        } catch (ClassNotFoundException e) {
-            throw new ExceptionInInitializerError(e);
-        }
-    }
+
 }

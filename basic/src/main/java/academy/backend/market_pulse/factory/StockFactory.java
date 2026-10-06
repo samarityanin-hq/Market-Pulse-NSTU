@@ -8,9 +8,7 @@ import java.math.BigDecimal;
 
 public class StockFactory implements InstrumentFactory {
 
-    static {
-        InstrumentFactories.register("STOCK", new StockFactory());
-    }
+    public StockFactory(){}
 
     @Override
     public Instrument create(String ticker, String name, Currency currency) {

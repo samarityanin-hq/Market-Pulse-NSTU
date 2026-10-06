@@ -1,21 +1,21 @@
 package academy.backend.market_pulse.factory;
 
-import java.math.BigDecimal;
-import java.time.Year;
-
 import academy.backend.market_pulse.model.Bond;
 import academy.backend.market_pulse.model.Currency;
 import academy.backend.market_pulse.model.Instrument;
 
+import java.math.BigDecimal;
+import java.util.Objects;
+
 public class BondFactory implements InstrumentFactory {
 
-    static {
-        InstrumentFactories.register("BOND", new BondFactory());
-    }
+    public BondFactory(){}
 
     @Override
     public Instrument create(String ticker, String name, Currency currency) {
-        // couponRate и maturityYear не собираются через CLI на этом этапе — значения по умолчанию.
-        return new Bond(ticker, name, currency, BigDecimal.ZERO, Year.now().getValue());
+        // TODO: создать Bond(ticker, name, currency, couponRate, maturityYear) — couponRate/
+        // maturityYear через CLI пока не собираются, использовать значения по умолчанию.
+
+        return new Bond(ticker, name, currency, new BigDecimal(0), 1);
     }
 }
