@@ -5,7 +5,7 @@ import java.util.Arrays;
 /**
  * Эталонная реализация {@link Portfolio}: хранит позиции в массиве.
  */
-public class PortfolioImpl implements Portfolio {
+/*public class PortfolioImpl implements Portfolio {
 
     private static final class PositionRecord implements Position {
         private final Instrument instrument;
@@ -49,4 +49,4 @@ public class PortfolioImpl implements Portfolio {
     public String getName() {
         return name;
     }
-}
+}*/

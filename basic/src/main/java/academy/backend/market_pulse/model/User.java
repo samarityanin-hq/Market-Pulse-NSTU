@@ -1,4 +1,4 @@
-package main.java.academy.backend.market_pulse.model;
+package academy.backend.market_pulse.model;
 
 import academy.backend.market_pulse.model.Instrument;
 
@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import academy.backend.market_pulse.model.*;
+import main.java.academy.backend.market_pulse.model.Portfolio;
 
 public class User implements Portfolio {
     private final String name;

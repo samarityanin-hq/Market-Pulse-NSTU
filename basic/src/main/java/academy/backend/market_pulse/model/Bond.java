@@ -1,6 +1,7 @@
 package academy.backend.market_pulse.model;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public class Bond extends Instrument {
 
@@ -10,6 +11,12 @@ public class Bond extends Instrument {
     public Bond(String ticker, String name, Currency currency,
                 BigDecimal couponRate, int maturityYear) {
         super(ticker, name, currency);
+
+        Objects.requireNonNull(couponRate, "couponRate не может быть null");
+        if (maturityYear <= 0){
+            throw new IllegalArgumentException("maturityYear должен быть больше нуля");
+        }
+
         this.couponRate = couponRate;
         this.maturityYear = maturityYear;
     }

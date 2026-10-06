@@ -1,5 +1,7 @@
 package academy.backend.market_pulse.model;
 
+import java.util.Objects;
+
 /**
  * Базовая абстракция финансового инструмента. Инкапсулирует общие для всех
  * инструментов данные (тикер, название, валюта) и защищает их инварианты
@@ -12,9 +14,10 @@ public abstract class Instrument {
     private final Currency currency;
 
     public Instrument(String ticker, String name, Currency currency) {
-        if (ticker == null || ticker.isBlank()) {
-            throw new IllegalArgumentException("Ticker cannot be blank");
-        }
+        Objects.requireNonNull(ticker, "Тикер не может быть null");
+        Objects.requireNonNull(name, "Название тикера не может быть null");
+        Objects.requireNonNull(currency, "Котировка не может быть null");
+
         this.ticker = ticker;
         this.name = name;
         this.currency = currency;

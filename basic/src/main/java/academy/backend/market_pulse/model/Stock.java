@@ -2,6 +2,7 @@ package academy.backend.market_pulse.model;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Objects;
 
 public class Stock extends Instrument {
 
@@ -12,6 +13,9 @@ public class Stock extends Instrument {
     public Stock(String ticker, String name, Currency currency,
                  String sector, BigDecimal dividendYield) {
         super(ticker, name, currency);
+        Objects.requireNonNull(sector, "sector не может быть null");
+        Objects.requireNonNull(dividendYield, "dividendYield не может быть null");
+
         this.sector = sector;
         this.dividendYield = dividendYield;
     }
