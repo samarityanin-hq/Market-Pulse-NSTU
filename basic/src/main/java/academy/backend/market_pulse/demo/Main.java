@@ -4,6 +4,7 @@ import academy.backend.market_pulse.cli.AddCommand;
 import academy.backend.market_pulse.cli.ListCommand;
 import academy.backend.market_pulse.cli.MarketPulseCli;
 import academy.backend.market_pulse.cli.SearchCommand;
+import academy.backend.market_pulse.filter.FilterFactory;
 import academy.backend.market_pulse.repository.InstrumentRepository;
 import picocli.CommandLine;
 
@@ -19,10 +20,11 @@ public class Main {
 
     public static void main(String[] args) {
         InstrumentRepository repository = new InstrumentRepository();
+        FilterFactory factory = new FilterFactory();
         CommandLine cli = new CommandLine(new MarketPulseCli())
                 .addSubcommand(new SearchCommand(repository))
                 .addSubcommand(new AddCommand(repository))
-                .addSubcommand(new ListCommand(repository));
+                .addSubcommand(new ListCommand(repository, factory));
 
         Scanner sc = new Scanner(System.in);
         for (;;) {

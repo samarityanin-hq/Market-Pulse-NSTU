@@ -31,16 +31,23 @@ public class ListCommand implements Callable<Integer> {
     private BigDecimal price;
 
     private final InstrumentRepository repository;
+    private final FilterFactory factory;
 
-    public ListCommand(InstrumentRepository repository) {
+    public ListCommand(InstrumentRepository repository, FilterFactory factory) {
         this.repository = repository;
+        this.factory = factory;
     }
 
     @Override
     public Integer call() {
         InstrumentFilter filter;
         try {
-            filter = buildFilter();
+            filter = factory.buildFilter(
+                    new FilterCriteria(type,
+                                        currency,
+                                        ticker,
+                                        priceOp,
+                                        price));
         } catch (Exception e) {
             System.out.println("Ошибка: " + e.getMessage());
             return 1;
@@ -53,25 +60,5 @@ public class ListCommand implements Callable<Integer> {
         }
 
         return 0;
-    }
-
-    private InstrumentFilter buildFilter(){
-        List<InstrumentFilter> filters = new ArrayList<>();
-
-        if (type != null) filters.add(new TypeFilter(type));
-        if (currency != null) filters.add(new CurrencyFilter(currency));
-        if (ticker != null) filters.add(new TickerFilter(ticker));
-        if (priceOp != null || price != null){
-            if (priceOp == null || price == null){
-                throw new IllegalArgumentException("--price-op и --price, указываются вместе");
-            }
-            filters.add(new PriceFilter(priceOp, price));
-        }
-
-        if (filters.size() > 1){
-            throw new IllegalArgumentException("Можно указать только один фильтр");
-        }
-
-        return filters.isEmpty() ? new NoFilter() : filters.getFirst();
     }
 }
