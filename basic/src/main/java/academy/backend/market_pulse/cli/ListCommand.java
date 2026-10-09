@@ -11,6 +11,9 @@ import academy.backend.market_pulse.repository.InstrumentRepository;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 
+/**
+ * @author Bogdan Kolganov
+ */
 @Command(name = "list", description = "Список инструментов")
 public class ListCommand implements Callable<Integer> {
     public enum ListCommandFilter {

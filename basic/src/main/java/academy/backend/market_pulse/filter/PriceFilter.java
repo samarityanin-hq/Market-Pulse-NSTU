@@ -5,6 +5,9 @@ import academy.backend.market_pulse.model.Stock;
 
 import java.math.BigDecimal;
 
+/**
+ * @author Bogdan Kolganov
+ */
 public class PriceFilter implements InstrumentFilter {
     private final BigDecimal price;
     private final EqualsOperator price_op;

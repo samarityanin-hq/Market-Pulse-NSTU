@@ -7,6 +7,9 @@ import academy.backend.market_pulse.model.Currency;
 import java.math.BigDecimal;
 import java.util.List;
 
+/**
+ * @author Bogdan Kolganov
+ */
 public final class InstrumentFilterConverter {
     public static InstrumentFilter convert(ListCommand.ListCommandFilter filter, List<Object> params) {
         return switch (filter) {
