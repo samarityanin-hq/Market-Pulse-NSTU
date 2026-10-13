@@ -2,7 +2,10 @@ package academy.backend.market_pulse.filter;
 
 import academy.backend.market_pulse.model.Instrument;
 
-public class TypeFilter implements InstrumentFilter{
+/**
+ * @author Bogdan Kolganov
+ */
+public class TypeFilter implements InstrumentFilter {
     private final String type;
 
     public TypeFilter(String type){
@@ -11,6 +14,6 @@ public class TypeFilter implements InstrumentFilter{
 
     @Override
     public boolean matches(Instrument instrument) {
-        return type.equalsIgnoreCase(instrument.getType());
+        return instrument.getType().equals(type.toUpperCase());
     }
 }

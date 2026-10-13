@@ -10,6 +10,8 @@ import academy.backend.market_pulse.model.Instrument;
 /**
  * Реестр фабрик инструментов. Вместо загрузки каждой фабрики можно заставить java найти все самостоятельно
  * так же блоки инициализации из классов фабрик так же можно убрать нужен только публичный конструктор
+ *
+ * @author Ilya Traize
  */
 public final class InstrumentFactories {
 
