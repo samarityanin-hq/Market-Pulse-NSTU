@@ -19,7 +19,7 @@ public class Registry <K, V>{
         Objects.requireNonNull(key, "ключ не может быть null");
         Objects.requireNonNull(value, "значение не может быть null");
 
-        //Можно выкинуть исключение на старе если допустим будут 2 одинаковых фабрики
+        //Можно выкинуть исключение, если допустим будут 2 одинаковых фабрики
         if (map.containsKey(key)){
             System.out.printf("Ключ %s, уже есть в хранилище%n", key);
             //throw new IllegalStateException("Дублирование фабрик запрещено");
