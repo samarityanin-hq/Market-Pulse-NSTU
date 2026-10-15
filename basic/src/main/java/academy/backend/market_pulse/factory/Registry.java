@@ -4,13 +4,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Registry <K, V>{
-    private final Map<K, V> map;
+    // Можно пока взять обычную хэш мапу, но если целиться на реальную программу обработки рынка
+    // то скорее всего придеться использовать многопоточную мапу
+    // private final Map<K, V> map = new ConcurrentHashMap<>();
+    private final Map<K, V> map = new HashMap<>();
 
-    public Registry() {
-        this.map = new HashMap<>();
-    }
+
+    public Registry(){}
 
     public void register(K key, V value){
         Objects.requireNonNull(key, "ключ не может быть null");
