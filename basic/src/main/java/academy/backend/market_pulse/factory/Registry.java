@@ -12,8 +12,6 @@ public class Registry <K, V>{
         this.map = new HashMap<>();
     }
 
-    // Лучше использовать Objects вместо Optional т.к.
-    // при проверке с Optional мы постоянно будем создавать новый объект в хипе
     public void register(K key, V value){
         Objects.requireNonNull(key, "ключ не может быть null");
         Objects.requireNonNull(value, "значение не может быть null");
@@ -21,7 +19,7 @@ public class Registry <K, V>{
         //Можно выкинуть исключение на старе если допустим будут 2 одинаковых фабрики
         if (map.containsKey(key)){
             System.out.printf("Ключ %s, уже есть в хранилище%n", key);
-            //throw new IllegalStateException("Дублирование фабрик");
+            //throw new IllegalStateException("Дублирование фабрик запрещено");
             return;
         }
 
