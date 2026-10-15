@@ -1,5 +1,6 @@
 package academy.backend.market_pulse.cli;
 
+import java.util.Optional;
 import java.util.concurrent.Callable;
 
 import academy.backend.market_pulse.model.Instrument;
@@ -21,8 +22,8 @@ public class SearchCommand implements Callable<Integer> {
 
     @Override
     public Integer call() {
-        Instrument instrument = repository.findByTicker(ticker);
-        if (instrument == null) {
+        Optional<Instrument> instrument = repository.findByTicker(ticker);
+        if (instrument.isEmpty()) {
             System.out.println("Инструмент не найден: " + ticker);
             return 1;
         }
