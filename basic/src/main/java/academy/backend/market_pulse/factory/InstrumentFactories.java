@@ -1,6 +1,7 @@
 package academy.backend.market_pulse.factory;
 
 import java.util.Optional;
+import java.util.ServiceConfigurationError;
 import java.util.ServiceLoader;
 
 import academy.backend.market_pulse.model.Currency;
@@ -17,11 +18,17 @@ public final class InstrumentFactories {
     //private static final Map<String, InstrumentFactory> REGISTRY = new HashMap<>();
     private static final Registry<String, InstrumentFactory> REGISTRY = new Registry<>();
 
+    // на всякий случай оборачиваем загрузку фабрики
     static {
-        ServiceLoader<InstrumentFactory> loader = ServiceLoader.load(InstrumentFactory.class);
-        for (InstrumentFactory factory : loader){
-            String type = factory.getClass().getSimpleName().replace("Factory", "").toUpperCase();
-            REGISTRY.register(type, factory);
+        try {
+            ServiceLoader<InstrumentFactory> loader = ServiceLoader.load(InstrumentFactory.class);
+            for (InstrumentFactory factory : loader){
+                String type = factory.getClass().getSimpleName().replace("Factory", "").toUpperCase();
+                REGISTRY.register(type, factory);
+            }
+        } catch (Exception | ServiceConfigurationError e) {
+            System.err.println("Критическая ошибка при загрузке фабрик: " + e.getMessage());
+            throw new ExceptionInInitializerError(e);
         }
     }
 
