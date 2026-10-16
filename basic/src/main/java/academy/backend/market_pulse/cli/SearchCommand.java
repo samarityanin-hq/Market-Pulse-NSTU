@@ -24,11 +24,11 @@ public class SearchCommand implements Callable<Integer> {
         return repository.findByTicker(ticker)
                 .map((instrument) -> {
                     System.out.println(instrument);
-                    return 1;
+                    return 0;
                 })
                 .orElseGet(() -> {
                     System.out.println("Инструмент не найден: " + ticker);
-                    return 0;
+                    return 1;
                 });
     }
 }
