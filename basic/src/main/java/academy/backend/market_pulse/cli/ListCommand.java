@@ -33,7 +33,7 @@ public class ListCommand implements Callable<Integer> {
     private BigDecimal price;
 
     @Option(names = "--price-op", description = "Оператор, определяющий логику сравнения (GE - >=, EQ - ==, LE - <=, LS - <, GR - >)")
-    private PriceFilter.EqualsOperator price_op;
+    private InstrumentFilterConverter.EqualsOperator price_op;
 
     private final InstrumentRepository repository;
 
