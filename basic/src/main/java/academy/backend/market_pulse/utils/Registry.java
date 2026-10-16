@@ -20,5 +20,4 @@ public class Registry<K, V> {
     public Optional<V> get(K key) {
         return Optional.ofNullable(storage.get(key));
     }
-
 }
