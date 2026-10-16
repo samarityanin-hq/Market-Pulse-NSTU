@@ -1,5 +1,6 @@
 package academy.backend.market_pulse.factory;
 
+import java.util.Objects;
 import java.util.Optional;
 import java.util.ServiceConfigurationError;
 import java.util.ServiceLoader;
@@ -39,11 +40,15 @@ public final class InstrumentFactories {
     }
 
     public static Instrument create(String type, String ticker, String name, Currency currency) {
-        Optional<InstrumentFactory> factory = REGISTRY.get(type.toUpperCase());
-        if (factory.isEmpty()) {
-            throw new IllegalArgumentException("Unknown instrument type: " + type);
-        }
-        return factory.get().create(ticker, name, currency);
+        Objects.requireNonNull(type);
+        Objects.requireNonNull(ticker);
+        Objects.requireNonNull(name);
+        Objects.requireNonNull(currency);
+
+        InstrumentFactory factory = REGISTRY.get(type.toUpperCase())
+                .orElseThrow(() ->new IllegalArgumentException("Unknown instrument type: " + type));
+
+        return factory.create(ticker, name, currency);
     }
 
 

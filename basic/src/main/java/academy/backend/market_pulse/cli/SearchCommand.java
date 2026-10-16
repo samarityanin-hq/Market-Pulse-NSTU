@@ -22,12 +22,11 @@ public class SearchCommand implements Callable<Integer> {
 
     @Override
     public Integer call() {
-        Optional<Instrument> instrument = repository.findByTicker(ticker);
-        if (instrument.isEmpty()) {
-            System.out.println("Инструмент не найден: " + ticker);
-            return 1;
-        }
+        Instrument instrument = repository.findByTicker(ticker)
+                .orElseThrow(() -> new IllegalStateException("Инструмент не найден: " + ticker));
+
         System.out.println(instrument);
+
         return 0;
     }
 }
