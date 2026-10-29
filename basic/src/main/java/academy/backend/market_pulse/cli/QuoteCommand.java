@@ -1,8 +1,6 @@
 package academy.backend.market_pulse.cli;
 
-import academy.backend.market_pulse.model.Quote;
 import academy.backend.market_pulse.service.QuoteService;
-import academy.backend.market_pulse.service.QuoteSource;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 
