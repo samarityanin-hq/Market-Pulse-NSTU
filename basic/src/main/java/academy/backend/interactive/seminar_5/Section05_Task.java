@@ -1,18 +1,17 @@
 package academy.backend.interactive.seminar_5;
 
-import academy.backend.market_pulse.cli.AddCommand;
-import academy.backend.market_pulse.cli.ListCommand;
-import academy.backend.market_pulse.cli.MarketPulseCli;
-import academy.backend.market_pulse.cli.SearchCommand;
+import academy.backend.market_pulse.cli.*;
 import academy.backend.market_pulse.factory.InstrumentFactories;
 import academy.backend.market_pulse.model.*;
 import academy.backend.market_pulse.repository.InstrumentRepository;
 import academy.backend.market_pulse.service.FakeQuoteSource;
+import academy.backend.market_pulse.service.QuoteService;
 import academy.backend.market_pulse.service.QuoteSource;
 import picocli.CommandLine;
 
 import java.math.BigDecimal;
 import java.util.Map;
+import java.util.Scanner;
 
 /// # Да, вы этого так ждали - самостоятельная работа!
 ///
@@ -42,8 +41,8 @@ public class Section05_Task {
         CommandLine cli = new CommandLine(new MarketPulseCli())
                 .addSubcommand(new SearchCommand(repository))
                 .addSubcommand(new AddCommand(repository))
-                .addSubcommand(new ListCommand(repository));
-        // TODO: добавить QuoteCommand(quoteService)
+                .addSubcommand(new ListCommand(repository))
+                .addSubcommand(new QuoteCommand(new QuoteService(quoteSource)));
 
         cli.execute("quote", "SBER");
         cli.execute("quote", "SBER", "VTB", "VTB");
